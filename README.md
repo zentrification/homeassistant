@@ -45,15 +45,20 @@ HACS
 * Sonoff LAN
 * Xiamoi Cloud Map Extractor
 
-## Screenshots
+## Config
 
-![Alt text](/screenshots/automations.jpg?raw=true "Automations")
+![Automations](/screenshots/automations.jpg?raw=true)
 
-### Miami Beach
-![Alt text](/screenshots/beach.jpg?raw=true "Miami Beach")
+### Helpers
+![Helpers](/screenshots/helpers.jpg?raw=true)
 
 ### MotionEye
-![Alt text](/screenshots/motioneye.jpg?raw=true "MotionEye")
+![MotionEye](/screenshots/motioneye.jpg?raw=true)
+
+## Screenshots
+
+### Miami Beach
+![Miami Beach](/screenshots/beach.jpg?raw=true)
 
 ### Traffic
-![Alt text](/screenshots/traffic.jpg?raw=true "Traffic")
+![Traffic](/screenshots/traffic.jpg?raw=true)

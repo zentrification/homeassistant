@@ -1,0 +1,10 @@
+night_lights_on:
+  alias: Night Lights On
+  mode: single
+  sequence:
+  - service: light.turn_off
+    target:
+      entity_id: '{{ expand(''light.all'') | reject(''in'', expand(''light.night''))
+        | map(attribute=''entity_id'') | join('', '') }}
+
+        '
