@@ -47,4 +47,7 @@ HACS
 
 ## Screenshots
 
+![Alt text](/screenshots/automations.jpg?raw=true "Automations")
 ![Alt text](/screenshots/beach.jpg?raw=true "Miami Beach")
+![Alt text](/screenshots/motioneye.jpg?raw=true "MotionEye")
+![Alt text](/screenshots/traffic.jpg?raw=true "Traffic")
