@@ -48,6 +48,12 @@ HACS
 ## Screenshots
 
 ![Alt text](/screenshots/automations.jpg?raw=true "Automations")
+
+### Miami Beach
 ![Alt text](/screenshots/beach.jpg?raw=true "Miami Beach")
+
+### MotionEye
 ![Alt text](/screenshots/motioneye.jpg?raw=true "MotionEye")
+
+### Traffic
 ![Alt text](/screenshots/traffic.jpg?raw=true "Traffic")

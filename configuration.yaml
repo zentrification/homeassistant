@@ -1,0 +1,111 @@
+default_config:
+
+# Load frontend themes from the themes folder
+frontend:
+  themes: !include_dir_merge_named themes
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+ffmpeg:
+recorder:
+  purge_keep_days: 365
+
+http:
+  ssl_certificate: /ssl/fullchain.pem
+  ssl_key: /ssl/privkey.pem
+
+# Add entries to left navigation
+panel_custom:
+  - name: ha_auto
+    sidebar_title: Automations
+    sidebar_icon: mdi:cog-outline
+    js_url: /api/hassio/app/entrypoint.js
+    url_path: 'config/automation'
+    embed_iframe: true
+    require_admin: true
+    config:
+      ingress: core_configurator
+  - name: ha_cameras
+    sidebar_title: Cameras
+    sidebar_icon: mdi:video
+    js_url: /api/hassio/app/entrypoint.js
+    url_path: 'media-browser/browser/app%2Cmedia-source%3A%2F%2Fcamera'
+    embed_iframe: true
+    require_admin: true
+    config:
+      ingress: core_configurator
+  - name: ha_integ
+    sidebar_title: Integrations
+    sidebar_icon: mdi:chip
+    js_url: /api/hassio/app/entrypoint.js
+    url_path: 'config/integrations'
+    embed_iframe: true
+    require_admin: true
+    config:
+      ingress: core_configurator
+  - name: ha_states
+    sidebar_title: States
+    sidebar_icon: mdi:cog-transfer
+    js_url: /api/hassio/app/entrypoint.js
+    url_path: 'developer-tools/state'
+    embed_iframe: true
+    require_admin: true
+    config:
+      ingress: core_configurator
+
+# https://www.home-assistant.io/integrations/shell_command/
+shell_command:
+  cameras_off: './foscam.sh preset_goto Off'
+  cameras_patio: './foscam.sh preset_goto Patio'
+  cameras_security: './foscam.sh preset_goto Security'
+  cameras_sunset: './foscam.sh preset_goto Sunset'
+
+# https://www.home-assistant.io/integrations/filter/
+sensor:
+  - platform: filter
+    name: 'Cat Weight Isabella'
+    entity_id: sensor.litter_robot_4_pet_weight
+    filters:
+      - filter: range
+        lower_bound: 9
+        upper_bound: 11
+
+  - platform: filter
+    name: 'Cat Weight Joey'
+    entity_id: sensor.litter_robot_4_pet_weight
+    filters:
+      - filter: range
+        lower_bound: 12
+        upper_bound: 14
+
+  - platform: powercalc
+    unique_id: 6cc63373-3f11-4785-9903-5923233956f8
+    entity_id: switch.sonoff_10018b448a
+    power_sensor_id: sensor.sonoff_10018b448a_power
+    force_energy_sensor_creation: true
+
+# https://www.home-assistant.io/integrations/command_line/
+command_line:
+  - switch:
+      name: camera motion detection
+      command_on: './motion.sh on'
+      command_off: './motion.sh off'
+      command_state: './motion.sh status | grep -o ACTIVE | uniq'
+      value_template: '{{ value == "ACTIVE" }}'
+
+# https://www.home-assistant.io/integrations/template/
+template:
+  - sensor:
+    - name: adaptive lighting brightness
+      state: "{{ state_attr('switch.adaptive_lighting_all', 'brightness_pct') }}"
+      unit_of_measurement: '%'
+  - sensor:
+    - name: adaptive lighting color temp
+      state: "{{ state_attr('switch.adaptive_lighting_all', 'color_temp_kelvin') }}"
+      unit_of_measurement: 'K'
